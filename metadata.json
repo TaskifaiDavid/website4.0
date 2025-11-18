@@ -1,4 +1,5 @@
 {
   "name": "TaskifAI Landing Page",
-  "description": "A stunning, high-performance landing page for TaskifAI featuring a clean white/green aesthetic, smooth animations, and detailed product sections."
+  "description": "A stunning, high-performance landing page for TaskifAI featuring a clean white/green aesthetic, smooth animations, and detailed product sections.",
+  "requestFramePermissions": []
 }

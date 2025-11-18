@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, TrendingUp, Target, Brain, X, Send, BarChart2, PieChart, Activity, AlertCircle, Database, Zap } from 'lucide-react';
+import { Search, TrendingUp, Target, Brain, X, Send, BarChart2, PieChart, Activity, AlertCircle, Database, Zap, Quote } from 'lucide-react';
 
 const CHART_SCENARIOS = [
   {
@@ -384,12 +384,12 @@ const ProblemSolution: React.FC = () => {
     <>
       {/* SECTION 1: THE DATA DISCONNECT (PROBLEM) */}
       <section id="problem" className="py-24 bg-white border-b border-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto"
+            className="max-w-3xl mx-auto text-center"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
               The Data Disconnect
@@ -400,7 +400,7 @@ const ProblemSolution: React.FC = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 text-center">
              {[
                { title: "Analysis Paralysis", desc: "Hours wasted manually cleaning spreadsheets instead of making decisions.", icon: AlertCircle },
                { title: "Strategic Drift", desc: "Daily actions are disconnected from your quarterly 'North Star' goals.", icon: Database },
@@ -422,6 +422,42 @@ const ProblemSolution: React.FC = () => {
                </motion.div>
              ))}
           </div>
+
+          {/* Market Reality / Quotes Section */}
+          <div className="mt-20 pt-12 border-t border-gray-100">
+              <p className="text-center text-xs font-bold text-gray-400 uppercase tracking-[0.2em] mb-12">
+                The Reality Check
+              </p>
+              <div className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="flex flex-col items-center text-center"
+                  >
+                      <Quote size={32} className="text-brand-200 mb-4 rotate-180" />
+                      <p className="text-xl font-medium text-gray-800 mb-4 leading-relaxed">
+                         "Data-driven organizations are 23 times more likely to acquire customers, 6 times more likely to retain them, and 19 times more likely to be profitable."
+                      </p>
+                      <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">— McKinsey & Company</div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="flex flex-col items-center text-center"
+                  >
+                      <Quote size={32} className="text-brand-200 mb-4 rotate-180" />
+                      <p className="text-xl font-medium text-gray-800 mb-4 leading-relaxed">
+                         "Businesses that rely on data for decision-making are 58% more likely to beat their revenue goals, and 162% more likely to significantly exceed them."
+                      </p>
+                      <div className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">— Forrester Consulting</div>
+                  </motion.div>
+              </div>
+          </div>
+
         </div>
       </section>
 
