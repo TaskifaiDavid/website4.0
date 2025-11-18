@@ -141,8 +141,8 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-gray-900 mb-8 leading-[1.1]"
             >
-              Your team of AI agents for <br className="hidden lg:block" />
-              <span className="text-brand-600">smarter sales decisions</span>
+              Your AI team, <br className="hidden lg:block" />
+              <span className="text-brand-600">focused only on your goals</span>
             </motion.h1>
 
             <motion.p
