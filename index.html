@@ -44,7 +44,7 @@
     <style>
       html {
         scroll-behavior: smooth;
-        font-size: 14.5px; /* Simulates ~90% zoom (14.5/16 = 0.906) */
+        font-size: 13.5px; /* Simulates ~85-90% zoom level */
       }
       body {
         -webkit-font-smoothing: antialiased;
@@ -60,11 +60,13 @@
   <script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+    "react": "https://esm.sh/react@18.3.1",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "react-dom": "https://esm.sh/react-dom@18.3.1?external=react",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/?external=react",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?external=react",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
+    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
   }
 }
 </script>

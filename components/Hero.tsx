@@ -139,10 +139,9 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-gray-900 mb-8 leading-[1.1]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-gray-900 mb-8 leading-[1.1]"
             >
-              Your AI team, <br className="hidden lg:block" />
-              <span className="text-brand-600">focused only on your goals</span>
+              Stop Flying Blind. <span className="text-brand-600">Hire Your AI Executive Team.</span>
             </motion.h1>
 
             <motion.p
@@ -151,7 +150,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-gray-500 mb-10 max-w-2xl leading-relaxed font-light"
             >
-              Our specialized AI agents automatically clean, analyze, and align your sales data, so you can stop guessing and start growing.
+              TaskifAI turns your messy reseller spreadsheets into context-aware intelligence. Predict stockouts, protect margins, and execute strategy, automatically.
             </motion.p>
 
             <motion.div
