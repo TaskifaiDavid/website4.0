@@ -33,9 +33,23 @@ const Navbar: React.FC = () => {
           <a 
             href="#" 
             onClick={(e) => scrollToSection(e, 'hero')}
-            className="text-xl font-bold tracking-tight text-gray-900 flex items-center"
+            className="flex items-center gap-2 group"
           >
-            Taskif<span className="text-brand-500">AI</span>
+            {/* Custom T Logo SVG */}
+            <div className="relative w-8 h-8 flex items-center justify-center">
+               <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform group-hover:scale-105 transition-transform duration-300">
+                  {/* Background Orbit */}
+                  <path d="M8 30C4 20 16 4 32 8" stroke="#86EFAC" strokeWidth="1.5" strokeLinecap="round" />
+                  {/* The Letter T */}
+                  <text x="20" y="30" fontSize="28" fontWeight="bold" fontFamily="serif" fill="#1C5D43" textAnchor="middle">T</text>
+                  {/* Foreground Orbit */}
+                  <path d="M10 34C18 38 36 24 32 8" stroke="#34B37E" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+                  {/* Dots */}
+                  <circle cx="32" cy="8" r="2" fill="#34B37E" className="animate-pulse" />
+                  <circle cx="8" cy="30" r="1.5" fill="#86EFAC" />
+               </svg>
+            </div>
+            <span className="text-xl font-bold tracking-tight text-brand-600">TaskifAI</span>
           </a>
 
           {/* Desktop Nav */}
