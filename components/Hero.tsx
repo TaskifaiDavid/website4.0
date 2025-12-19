@@ -1,20 +1,21 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Send, Brain, Search, TrendingUp, Target } from 'lucide-react';
+import { ArrowRight, Send, Brain, Search, TrendingUp, Target, LucideIcon } from 'lucide-react';
 
 const SCENARIOS = [
   {
     question: "Compare Q3 sales growth between our US and German markets.",
     agent: "The Analyst",
     icon: Search,
-    color: "text-blue-600 bg-blue-50",
+    color: "text-brand-600 bg-brand-50",
     answer: "US sales grew 12% driven by new influencers, while Germany flatlined. However, Germany has 20% higher retention. Recommendation: Replicate the US influencer strategy in the DACH region."
   },
   {
     question: "Project the impact on inventory if we run a 20% flash sale this weekend.",
     agent: "The Forecaster",
     icon: TrendingUp,
-    color: "text-purple-600 bg-purple-50",
+    color: "text-brand-600 bg-brand-50",
     answer: "You will likely stock out of the 'Night Cream' SKU by Sunday afternoon. I recommend capping the discount on that item or checking safety stock levels immediately."
   },
   {
@@ -27,6 +28,13 @@ const SCENARIOS = [
 ];
 
 type Phase = 'typing_question' | 'thinking' | 'typing_answer' | 'reading' | 'deleting';
+
+export const BrandedIcon = ({ icon: Icon, colorClass }: { icon: LucideIcon, colorClass?: string }) => (
+  <div className={`relative flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-gray-100 shadow-sm ${colorClass}`}>
+    <Icon size={18} className="relative z-10" />
+    <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-400 border border-white shadow-sm" />
+  </div>
+);
 
 const Hero: React.FC = () => {
   const scrollToContact = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -44,53 +52,46 @@ const Hero: React.FC = () => {
     let timeout: ReturnType<typeof setTimeout>;
     const currentScenario = SCENARIOS[scenarioIndex];
 
-    // PHASE 1: Typing Question
     if (phase === 'typing_question') {
       if (displayQuestion.length < currentScenario.question.length) {
         timeout = setTimeout(() => {
           setDisplayQuestion(currentScenario.question.slice(0, displayQuestion.length + 1));
-        }, 20); // Fast typing speed
+        }, 20);
       } else {
         timeout = setTimeout(() => setPhase('thinking'), 300);
       }
     }
     
-    // PHASE 2: Thinking (Orchestrator -> Agent)
     else if (phase === 'thinking') {
-       // Step 1: Orchestrator active
        if (thinkingStep === 0) {
          timeout = setTimeout(() => {
            setThinkingStep(1);
          }, 800);
        } 
-       // Step 2: Specialist active
        else if (thinkingStep === 1) {
          timeout = setTimeout(() => {
            setPhase('typing_answer');
-           setThinkingStep(0); // Reset for next time
+           setThinkingStep(0);
          }, 800);
        }
     }
 
-    // PHASE 3: Typing Answer (Streaming)
     else if (phase === 'typing_answer') {
       if (displayAnswer.length < currentScenario.answer.length) {
         timeout = setTimeout(() => {
           setDisplayAnswer(currentScenario.answer.slice(0, displayAnswer.length + 1));
-        }, 15); // Fast reading speed
+        }, 15);
       } else {
         setPhase('reading');
       }
     }
 
-    // PHASE 4: Reading
     else if (phase === 'reading') {
       timeout = setTimeout(() => {
         setPhase('deleting');
-      }, 6000); // Longer read time for complex answers
+      }, 6000);
     }
 
-    // PHASE 5: Deleting / Resetting
     else if (phase === 'deleting') {
       if (displayQuestion.length > 0) {
          timeout = setTimeout(() => {
@@ -114,7 +115,6 @@ const Hero: React.FC = () => {
 
   return (
     <section id="hero" className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-white min-h-[80vh] flex items-center">
-      {/* Subtle Background Gradient */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute -top-[20%] right-0 w-[600px] h-[600px] bg-brand-50 rounded-full blur-3xl opacity-60" />
         <div className="absolute top-[40%] -left-[10%] w-[500px] h-[500px] bg-gray-50 rounded-full blur-3xl opacity-60" />
@@ -123,7 +123,6 @@ const Hero: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Text Content */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -170,7 +169,6 @@ const Hero: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Chat Graphic with Synchronized Animation */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -180,7 +178,6 @@ const Hero: React.FC = () => {
             <div className="relative bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden p-2 transform transition-transform duration-500 hover:scale-[1.01]">
                 <div className="bg-gray-50 rounded-xl p-5 text-left min-h-[240px] flex flex-col justify-end relative">
                     
-                    {/* Header status */}
                     <div className="absolute top-4 left-5 right-5 flex justify-between items-start z-20">
                          <div className="flex items-center space-x-2">
                              <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -196,7 +193,6 @@ const Hero: React.FC = () => {
                          </div>
                     </div>
 
-                    {/* Thought Process Visualization */}
                     <AnimatePresence>
                       {phase === 'thinking' && (
                         <motion.div 
@@ -205,14 +201,14 @@ const Hero: React.FC = () => {
                           exit={{ opacity: 0, y: -10 }}
                           className="absolute bottom-20 left-5 right-5 mb-2"
                         >
-                           <div className="flex items-center gap-3 text-xs font-mono text-gray-400 bg-white/50 p-2 rounded-lg border border-dashed border-gray-200 inline-flex">
+                           <div className="flex items-center gap-3 text-xs font-mono text-gray-400 bg-white/50 p-2 rounded-lg border border-dashed border-gray-200 inline-flex shadow-sm">
                               <div className={`flex items-center gap-2 transition-colors duration-300 ${thinkingStep >= 0 ? 'text-gray-800 font-bold' : ''}`}>
-                                <Brain size={14} />
+                                <Brain size={14} className="text-brand-500" />
                                 <span>Orchestrator</span>
                               </div>
                               <div className="w-4 h-px bg-gray-300"></div>
                               <div className={`flex items-center gap-2 transition-colors duration-300 ${thinkingStep >= 1 ? 'text-gray-800 font-bold' : ''}`}>
-                                <CurrentIcon size={14} />
+                                <CurrentIcon size={14} className="text-brand-500" />
                                 <span>{currentScenario.agent}</span>
                               </div>
                            </div>
@@ -221,7 +217,6 @@ const Hero: React.FC = () => {
                     </AnimatePresence>
                     
                     <div className="space-y-4 w-full relative z-10 mt-10">
-                        {/* User Input (Left Side) */}
                         <div className="flex gap-3 items-end w-full">
                              <div className="w-8 h-8 rounded-full bg-gray-900 flex-shrink-0 flex items-center justify-center font-bold text-white text-[10px] tracking-wider">YOU</div>
                              <div className="bg-white border border-gray-200 px-4 py-3 rounded-2xl rounded-bl-none shadow-sm text-gray-900 text-base w-full flex justify-between items-center">
@@ -237,7 +232,6 @@ const Hero: React.FC = () => {
                              </div>
                         </div>
                         
-                        {/* Agent Response (Right Side) */}
                         <div className="min-h-[110px] w-full relative">
                           <AnimatePresence mode="wait">
                             {(phase === 'typing_answer' || phase === 'reading') && (
@@ -249,8 +243,8 @@ const Hero: React.FC = () => {
                                 transition={{ duration: 0.2 }}
                                 className="flex gap-3 items-start flex-row-reverse absolute right-0 w-full justify-end"
                               >
-                                   <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center shadow-sm ${currentScenario.color.split(' ')[1]}`}>
-                                       <CurrentIcon size={16} className={currentScenario.color.split(' ')[0]} />
+                                   <div className="flex-shrink-0 mt-1">
+                                       <BrandedIcon icon={CurrentIcon} colorClass="text-brand-600" />
                                    </div>
                                    <div className={`bg-brand-50 px-5 py-3 rounded-2xl rounded-br-none text-gray-800 max-w-xl text-sm border border-brand-100 shadow-sm`}>
                                        <div className="flex items-center gap-2 mb-1 justify-start">
