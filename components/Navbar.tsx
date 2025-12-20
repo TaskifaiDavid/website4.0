@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,124 +9,101 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigateHome, isHome }) => {
+  const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
     if (!isHome) {
       onNavigateHome();
-      // Delay scroll until home view is mounted
+      // Allow time for navigation to home before scrolling
       setTimeout(() => {
-        const element = document.getElementById(id);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     } else {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
-  const navLinks = [
-    { name: 'Mission', id: 'problem' },
-    { name: 'The Team', id: 'solution' },
-  ];
+  // Map menu items to element IDs
+  const getTargetId = (item: string) => {
+    switch (item) {
+      case 'Mission': return 'solution';
+      case 'The Board': return 'solution';
+      case 'Access': return 'contact';
+      default: return 'contact';
+    }
+  };
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
-      >
-        <div className="bg-white/95 backdrop-blur-xl border border-gray-200/50 shadow-2xl shadow-teal-950/10 rounded-full px-6 py-2.5 pointer-events-auto flex items-center justify-between gap-8 md:min-w-[550px]">
-          {/* Logo - Text Only */}
-          <a 
-            href="#" 
-            onClick={(e) => { e.preventDefault(); onNavigateHome(); }}
-            className="flex items-center gap-2 group"
-          >
-            <div className="flex items-center">
-              <span className="text-3xl font-black tracking-tighter text-[#0F172A]">Taskif</span>
-              <span className="text-3xl font-black tracking-tighter text-[#0D9488]">AI</span>
-            </div>
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${scrolled ? 'py-3' : 'py-6'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`glass-panel border border-white/50 rounded-2xl px-6 py-3 flex items-center justify-between shadow-sm transition-all`}>
+          <a href="#" onClick={(e) => { e.preventDefault(); onNavigateHome(); }} className="flex items-center gap-1 group">
+            <span className="text-xl md:text-2xl font-bold tracking-tight text-primary-900">Taskif<span className="text-primary-600">AI</span></span>
           </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={`#${link.id}`}
-                onClick={(e) => scrollToSection(e, link.id)}
-                className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-teal-600 transition-colors"
+          <div className="hidden md:flex items-center gap-8">
+            {['Mission', 'The Board', 'Access'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase().replace(' ', '-')}`}
+                onClick={(e) => scrollToSection(e, getTargetId(item))}
+                className="text-xs font-semibold text-primary-900/70 hover:text-primary-600 transition-colors"
               >
-                {link.name}
+                {item}
               </a>
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:block">
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, 'contact')}
-              className="bg-[#0F172A] text-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#0D9488] transition-all duration-300 shadow-lg shadow-teal-900/10"
-            >
-              Get Access
-            </a>
-          </div>
+          <motion.a 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href="#contact"
+            onClick={(e) => scrollToSection(e, 'contact')}
+            className="hidden md:block bg-primary-600 text-white px-5 py-2 rounded-lg text-xs font-bold shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-colors"
+          >
+            Hire Your AI Team
+          </motion.a>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-900 focus:outline-none p-1"
-            >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-primary-900">
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-      </motion.nav>
+      </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-x-4 top-24 z-40 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden md:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-4 right-4 bg-white mt-2 border border-primary-50 rounded-xl shadow-xl p-4 flex flex-col gap-2 md:hidden"
           >
-            <div className="p-6 space-y-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={`#${link.id}`}
-                  onClick={(e) => scrollToSection(e, link.id)}
-                  className="block px-4 py-4 text-lg font-bold text-gray-800 hover:bg-gray-50 rounded-2xl"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="pt-4 mt-2 border-t border-gray-100">
-                <a
-                  href="#contact"
-                  onClick={(e) => scrollToSection(e, 'contact')}
-                  className="block w-full text-center px-4 py-4 bg-teal-600 text-white font-bold rounded-2xl shadow-xl shadow-teal-500/20"
-                >
-                  Get Early Access
-                </a>
-              </div>
-            </div>
+             {['Mission', 'The Board', 'Access'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase().replace(' ', '-')}`}
+                onClick={(e) => scrollToSection(e, getTargetId(item))}
+                className="text-sm font-semibold text-primary-900 p-3 hover:bg-primary-50 rounded-lg"
+              >
+                {item}
+              </a>
+            ))}
+            <a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} className="bg-primary-600 text-white p-3 rounded-lg text-center font-bold mt-2">Hire Your AI Team</a>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 };
 
