@@ -8,42 +8,63 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LegalPage from './components/LegalPage';
 
-export type ViewType = 'home' | 'terms' | 'policy';
+export type ViewType = 'home' | 'terms' | 'privacy';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('home');
 
-  // Handle scroll to top when changing views
+  // Sync state with hash for deep-linking
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [view]);
-
-  // Sync state with hash for basic deep-linking
-  useEffect(() => {
-    const handleHashChange = () => {
+    const handleLocationChange = () => {
       const hash = window.location.hash;
-      if (hash === '#terms') setView('terms');
-      else if (hash === '#policy') setView('policy');
-      else setView('home');
+      
+      // Handle hash-based routing.
+      // We removed checking pathname to avoid issues where the server routing
+      // might be sticky or configured unexpectedly during updates.
+      if (hash === '#terms') {
+        setView('terms');
+        window.scrollTo(0, 0);
+      } else if (hash === '#privacy') {
+        setView('privacy');
+        window.scrollTo(0, 0);
+      } else {
+        setView('home');
+      }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // Initial check
+    window.addEventListener('hashchange', handleLocationChange);
+    // popstate is still good to listen to for browser back/forward buttons
+    window.addEventListener('popstate', handleLocationChange);
+    
+    // Initial check
+    handleLocationChange();
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, []);
 
   const navigateTo = (newView: ViewType) => {
-    if (newView === 'home') window.location.hash = '';
-    else window.location.hash = newView;
+    if (newView === 'home') {
+      // Fix: Avoid pushState which causes SecurityError in blob/iframe contexts.
+      // We accept that a trailing '#' might remain in the URL in some browsers.
+      if (window.location.hash) {
+        window.location.hash = ''; 
+      }
+      // Also scroll to top explicitly when going home
+      window.scrollTo(0, 0);
+    } else {
+      window.location.hash = newView;
+    }
     setView(newView);
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans selection:bg-brand-100 selection:text-brand-900">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary-100 selection:text-primary-900">
       <Navbar onNavigateHome={() => navigateTo('home')} isHome={view === 'home'} />
       
-      <main>
+      <main className="animate-in">
         {view === 'home' ? (
           <>
             <Hero />
@@ -52,7 +73,7 @@ const App: React.FC = () => {
             <Contact />
           </>
         ) : (
-          <LegalPage type={view as 'terms' | 'policy'} />
+          <LegalPage type={view as 'terms' | 'privacy'} />
         )}
       </main>
 
