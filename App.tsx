@@ -4,11 +4,13 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SocialProof from './components/SocialProof';
 import ProblemSolution from './components/ProblemSolution';
+import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LegalPage from './components/LegalPage';
+import SecurityPage from './components/SecurityPage';
 
-export type ViewType = 'home' | 'terms' | 'privacy';
+export type ViewType = 'home' | 'terms' | 'privacy' | 'security-commitment';
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('home');
@@ -18,14 +20,14 @@ const App: React.FC = () => {
     const handleLocationChange = () => {
       const hash = window.location.hash;
       
-      // Handle hash-based routing.
-      // We removed checking pathname to avoid issues where the server routing
-      // might be sticky or configured unexpectedly during updates.
       if (hash === '#terms') {
         setView('terms');
         window.scrollTo(0, 0);
       } else if (hash === '#privacy') {
         setView('privacy');
+        window.scrollTo(0, 0);
+      } else if (hash === '#security-commitment') {
+        setView('security-commitment');
         window.scrollTo(0, 0);
       } else {
         setView('home');
@@ -33,7 +35,6 @@ const App: React.FC = () => {
     };
 
     window.addEventListener('hashchange', handleLocationChange);
-    // popstate is still good to listen to for browser back/forward buttons
     window.addEventListener('popstate', handleLocationChange);
     
     // Initial check
@@ -47,12 +48,9 @@ const App: React.FC = () => {
 
   const navigateTo = (newView: ViewType) => {
     if (newView === 'home') {
-      // Fix: Avoid pushState which causes SecurityError in blob/iframe contexts.
-      // We accept that a trailing '#' might remain in the URL in some browsers.
       if (window.location.hash) {
         window.location.hash = ''; 
       }
-      // Also scroll to top explicitly when going home
       window.scrollTo(0, 0);
     } else {
       window.location.hash = newView;
@@ -61,7 +59,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary-100 selection:text-primary-900">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary-900 selection:text-white">
       <Navbar onNavigateHome={() => navigateTo('home')} isHome={view === 'home'} />
       
       <main className="animate-in">
@@ -70,8 +68,11 @@ const App: React.FC = () => {
             <Hero />
             <SocialProof />
             <ProblemSolution />
+            <Pricing />
             <Contact />
           </>
+        ) : view === 'security-commitment' ? (
+          <SecurityPage />
         ) : (
           <LegalPage type={view as 'terms' | 'privacy'} />
         )}
