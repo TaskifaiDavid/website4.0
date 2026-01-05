@@ -16,36 +16,28 @@
               mono: ['"JetBrains Mono"', 'monospace'],
             },
             colors: {
-              background: '#F8FAFC', // Updated to match CSS variable 0 0% 98%
-              foreground: '#0F172A',
+              background: '#FFFFFF', 
+              foreground: '#09090B',
               primary: {
-                50: '#F0F9FF',
-                100: '#E0F2FE',
-                200: '#BAE6FD',
-                300: '#7DD3FC',
-                400: '#38BDF8',
-                500: '#3A7CA5', // The precise Blue requested
-                600: '#0284C7',
-                700: '#0369A1',
-                800: '#075985',
-                900: '#0C4A6E',
+                50: '#FAFAFA',
+                100: '#F4F4F5',
+                200: '#E4E4E7',
+                300: '#D4D4D8',
+                400: '#A1A1AA',
+                500: '#71717A',
+                600: '#52525B',
+                700: '#3F3F46',
+                800: '#27272A',
+                900: '#18181B', // Almost Black
+                950: '#09090B', // Black
               },
+              // Keeping accents but desaturating or making them stark
               accent: {
-                500: '#81C3D7',
-                pink: '#fce7f3',
-                blue: '#E0F2FE',
-                green: '#DCFCE7',
-                yellow: '#FEF9C3',
-                purple: '#F3E8FF',
-                orange: '#FFEDD5',
-              },
-              success: {
-                500: '#10B981',
-                700: '#047857',
+                500: '#18181B', // Black accent
               },
               muted: {
-                DEFAULT: '#F1F5F9',
-                foreground: '#64748B',
+                DEFAULT: '#F4F4F5',
+                foreground: '#71717A',
               }
             },
             borderRadius: {
@@ -54,7 +46,7 @@
               '2xl': '1rem',
             },
             boxShadow: {
-              'glow': '0 0 20px -5px rgba(58, 124, 165, 0.3)',
+              'glow': '0 0 20px -5px rgba(0, 0, 0, 0.1)',
             }
           }
         }
@@ -67,24 +59,24 @@
       }
       html {
         scroll-behavior: smooth;
-        font-size: 15px;
+        font-size: 12.5px; /* Further scaled down */
       }
       body {
-        background-color: #F8FAFC;
-        color: #0F172A;
+        background-color: #FFFFFF;
+        color: #09090B;
         font-family: 'Plus Jakarta Sans', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
       }
       .glass-panel {
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
       }
       .clean-card {
         background: #ffffff;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #E4E4E7;
         border-radius: 1rem;
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.02), 0 2px 4px -2px rgb(0 0 0 / 0.02);
       }
@@ -105,19 +97,19 @@
         width: 8px;
       }
       ::-webkit-scrollbar-track {
-        background: #F8FAFC;
+        background: #FAFAFA;
       }
       ::-webkit-scrollbar-thumb {
-        background: #BAE6FD;
+        background: #D4D4D8;
         border-radius: 10px;
-        border: 2px solid #F8FAFC;
+        border: 2px solid #FAFAFA;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #3A7CA5;
+        background: #71717A;
       }
       ::selection {
-        background: #BAE6FD;
-        color: #0C4A6E;
+        background: #18181B;
+        color: #FFFFFF;
       }
     </style>
     <script type="importmap">
