@@ -263,7 +263,7 @@ const Hero: React.FC = () => {
           </p>
 
           <p className="text-base sm:text-lg text-primary-600 max-w-lg mb-10 leading-relaxed font-medium">
-            TaskifAI is the only platform built to handle the messy reality of wholesale data. We automatically clean and unify reports from all your resellers - giving you back 75% of your time.
+            TaskifAI is the only platform built to handle the messy reality of wholesale data. We automatically clean and unify reports from all your resellers — giving you back your valuable time.
           </p>
 
           <div className="flex flex-col gap-4">
