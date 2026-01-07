@@ -204,8 +204,8 @@ const ChatAnimation = () => {
       <div className="flex items-center justify-between mb-4 border-b border-primary-100 pb-4 shrink-0">
         <div className="flex items-center gap-2">
           <div className="relative flex h-2.5 w-2.5">
-             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-600"></span>
+             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-300 opacity-75"></span>
+             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-900"></span>
           </div>
           <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary-900/60 font-mono">TaskifAI Core</span>
         </div>
@@ -248,7 +248,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-[10px] font-bold uppercase tracking-[0.15em] mb-8 shadow-sm">
-            <Sparkles size={12} className="text-primary-600" />
+            <Sparkles size={12} className="text-primary-900" />
             The Future of Operations
           </div>
           

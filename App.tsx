@@ -51,13 +51,14 @@ const App: React.FC = () => {
         newView = 'privacy';
       } else if (hash === '#security-commitment') {
         newView = 'security-commitment';
-      } else if (hash === '#articles') {
+      } else if (hash === '#articles' || hash.startsWith('#articles/')) {
         newView = 'articles';
       }
       
       setView(newView);
       updateTitle(newView);
       
+      // If we are navigating to a specific legal/blog page, scroll to top
       if (newView !== 'home') {
         window.scrollTo(0, 0);
       }
