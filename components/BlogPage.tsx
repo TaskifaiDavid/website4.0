@@ -14,6 +14,88 @@ interface Article {
   content: React.ReactNode;
 }
 
+const ReferenceItem: React.FC<{ text: string; url?: string }> = ({ text, url }) => (
+  <li className="pl-2">
+    <span>{text} </span>
+    {url && (
+      <a 
+        href={url} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="text-primary-400 hover:text-primary-900 underline decoration-primary-200 break-all block mt-1"
+      >
+        {url}
+      </a>
+    )}
+  </li>
+);
+
+const ArticleReferences: React.FC<{ items: { text: string; url?: string }[] }> = ({ items }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-t border-primary-200 mt-12 pt-8">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary-400 hover:text-primary-900 transition-colors group select-none"
+      >
+        <ChevronRight size={14} className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
+        {isOpen ? 'Hide References' : 'View References'}
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <ol className="list-decimal pl-5 space-y-4 text-xs text-primary-500 font-mono mt-6">
+              {items.map((item, idx) => (
+                <ReferenceItem key={idx} text={item.text} url={item.url} />
+              ))}
+            </ol>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+const REFERENCES_LIST = [
+  { text: 'Givaudan. "About Givaudan."', url: 'https://www.givaudan.com/our-company/about-givaudan' },
+  { text: 'ISO. "ISO 22716:2007 - Cosmetics GMP Guidelines."', url: 'https://www.iso.org/standard/36437.html' },
+  { text: 'New Directions Aromatics. "Everything You Should Know About Cosmetic GMP."', url: 'https://www.newdirectionsaromatics.com/blog/everything-you-should-know-about-cosmetic-gmp-good-manufacturing-practices/' },
+  { text: 'Givaudan. "Achieving our 2025 strategy - Integrated Report 2022."', url: 'https://integratedreport.givaudan.com/2022/value-creation/achieving-2025-strategy' },
+  { text: 'Built In. "Marketing Manager - Watches and Fine Jewellery - CHANEL."', url: 'https://builtin.com/job/marketing-manager-watches-and-fine-jewellery/4064048' },
+  { text: 'Multiple Shiseido job postings referencing Excel expertise requirements, 2024-2025.', url: '' },
+  { text: 'ZoomInfo. "United Perfumes - Overview."', url: 'https://www.zoominfo.com/c/united-perfumes/447094765' },
+  { text: 'Al Hussein Perfumes. Corporate website.', url: 'https://alhusseinperfumes.com/' },
+  { text: 'Nordic Perfume operations data, Latvia.', url: '' },
+  { text: 'BFF International. "Fragrance. Fashion. Forever."', url: 'https://bffgroup.co/' },
+  { text: 'United Perfumes. Distributor pricing downloads available in Excel format.', url: '' },
+  { text: 'Fluxygen. "The Impact of Human Error Rates in Manual Data Entry."', url: 'https://fluxygen.com/resources/impact-of-human-error-rates/' },
+  { text: 'DocuClipper. "67 Data Entry Statistics For 2025."', url: 'https://www.docuclipper.com/blog/data-entry-statistics/' },
+  { text: 'Industry productivity analysis for operations teams in consumer goods distribution.', url: '' },
+  { text: 'Circana. "Holiday 2024 Fragrance Trends: A Season of Scent and Luxury."', url: 'https://www.circana.com/intelligence/blog/2024/whats-in-store-for-fragrances-this-holiday-season/' },
+  { text: 'NPD Group. Prestige fragrance quarterly sales analysis, 2024.', url: '' },
+  { text: 'Cosmetics Business. "Fragrance Trends Report." May 2025.', url: '' },
+  { text: 'Spate. "Gourmand fragrance search trend analysis." 2024.', url: '' },
+  { text: 'Black Swan Data. "Functional fragrance market projections." 2024-2034.', url: '' },
+  { text: 'FDA. "Modernization of Cosmetics Regulation Act of 2022 (MoCRA)."', url: 'https://www.fda.gov/cosmetics/cosmetics-laws-regulations/modernization-cosmetics-regulation-act-2022-mocra' },
+  { text: 'Thermo Fisher Scientific. "Navigating MoCRA And How a LIMS Can Help."', url: 'https://www.thermofisher.com/blog/connectedlab/navigating-mocra-and-how-a-lims-can-help/' },
+  { text: 'IFRA. "Notification of the 51st Amendment to the IFRA Standards."', url: 'https://ifrafragrance.org/latest-updates/press-releases/notification-of-the-51st-amendment-to-the-ifra-standards' },
+  { text: 'Expert Market Research. "Middle East Fragrance Market Report 2024-2034."', url: '' },
+  { text: 'BW Confidential. "Beautyworld analyzes the changing face of fragrance in the Middle East."', url: 'https://www.bwconfidential.com/beautyworld-analyzes-the-changing-face-of-fragrance-in-the-middle-east/' },
+  { text: 'Chalhoub Group. "Ramadan and Eid seasonal impact analysis." 2025.', url: '' },
+  { text: 'Hotel & Catering. "5 Minutes With... SAGMA CORP."', url: 'https://hotelandcatering.com/interviews-features/5-minutes-sagma-corp' },
+  { text: 'Sara Group Holdings. "Sara Prestige."', url: 'https://saragroups.com/sara-prestige/' },
+  { text: 'WWD. "Global Beauty Industry Challenges: Slowing Demand and Shifting Markets."', url: 'https://wwd.com/beauty-industry-news/beauty-features/global-beauty-industry-challenges-demand-slows-asia-u-s-1236952965/' },
+  { text: 'Data&Data. "The Hidden Costs of Discounted Scents: How the Grey Market is Shaping the Perfume Industry."', url: 'https://data-and-data.com/en/the-hidden-costs-of-discounted-scents-how-the-grey-market-is-shaping-the-perfume-industry/' },
+  { text: 'Scent City. "How and Why the Grey Market is Harming the Luxury Fragrance Industry."', url: 'https://www.thescentcity.com/blogs/news/how-and-why-the-grey-market-is-harming-the-luxury-fragrance-industry/' },
+];
+
 const ARTICLES: Article[] = [
   {
     id: '1',
@@ -200,42 +282,7 @@ const ARTICLES: Article[] = [
             </p>
         </section>
 
-        {/* References */}
-        <section className="border-t border-primary-100 pt-8">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-primary-400 mb-6">References</h3>
-            <ol className="list-decimal pl-5 space-y-2 text-xs text-primary-500 font-mono">
-                <li>Givaudan. "About Givaudan."</li>
-                <li>ISO. "ISO 22716:2007 - Cosmetics GMP Guidelines."</li>
-                <li>New Directions Aromatics. "Everything You Should Know About Cosmetic GMP."</li>
-                <li>Givaudan. "Achieving our 2025 strategy - Integrated Report 2022."</li>
-                <li>Built In. "Marketing Manager - Watches and Fine Jewellery - CHANEL."</li>
-                <li>Multiple Shiseido job postings referencing Excel expertise requirements, 2024-2025.</li>
-                <li>ZoomInfo. "United Perfumes - Overview."</li>
-                <li>Al Hussein Perfumes. Corporate website.</li>
-                <li>Nordic Perfume operations data, Latvia.</li>
-                <li>BFF International. "Fragrance. Fashion. Forever."</li>
-                <li>United Perfumes. Distributor pricing downloads available in Excel format.</li>
-                <li>Fluxygen. "The Impact of Human Error Rates in Manual Data Entry."</li>
-                <li>DocuClipper. "67 Data Entry Statistics For 2025."</li>
-                <li>Industry productivity analysis for operations teams in consumer goods distribution.</li>
-                <li>Circana. "Holiday 2024 Fragrance Trends: A Season of Scent and Luxury."</li>
-                <li>NPD Group. Prestige fragrance quarterly sales analysis, 2024.</li>
-                <li>Cosmetics Business. "Fragrance Trends Report." May 2025.</li>
-                <li>Spate. "Gourmand fragrance search trend analysis." 2024.</li>
-                <li>Black Swan Data. "Functional fragrance market projections." 2024-2034.</li>
-                <li>FDA. "Modernization of Cosmetics Regulation Act of 2022 (MoCRA)."</li>
-                <li>Thermo Fisher Scientific. "Navigating MoCRA And How a LIMS Can Help."</li>
-                <li>IFRA. "Notification of the 51st Amendment to the IFRA Standards."</li>
-                <li>Expert Market Research. "Middle East Fragrance Market Report 2024-2034."</li>
-                <li>BW Confidential. "Beautyworld analyzes the changing face of fragrance in the Middle East."</li>
-                <li>Chalhoub Group. "Ramadan and Eid seasonal impact analysis." 2025.</li>
-                <li>Hotel & Catering. "5 Minutes With... SAGMA CORP."</li>
-                <li>Sara Group Holdings. "Sara Prestige."</li>
-                <li>WWD. "Global Beauty Industry Challenges: Slowing Demand and Shifting Markets."</li>
-                <li>Data&Data. "The Hidden Costs of Discounted Scents: How the Grey Market is Shaping the Perfume Industry."</li>
-                <li>Scent City. "How and Why the Grey Market is Harming the Luxury Fragrance Industry."</li>
-            </ol>
-        </section>
+        <ArticleReferences items={REFERENCES_LIST} />
 
       </div>
     )
