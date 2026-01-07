@@ -1,10 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TaskifAI | Collaborative Brand Intelligence</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>TaskifAI | The Brand Intelligence OS for Wholesale</title>
+    <meta name="title" content="TaskifAI | The Brand Intelligence OS for Wholesale">
+    <meta name="description" content="Stop drowning in reseller spreadsheets. TaskifAI unifies sales data from all your wholesale partners into one strategic dashboard. Built for fragrance and beauty brands.">
+    <meta name="keywords" content="wholesale data automation, brand intelligence, fragrance industry software, reseller data parsing, sales operations AI, automated sell-out reporting">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="TaskifAI AB">
+    <link rel="canonical" href="https://www.taskifai.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.taskifai.com/">
+    <meta property="og:title" content="TaskifAI | Collaborative Brand Intelligence">
+    <meta property="og:description" content="Stop drowning in reseller spreadsheets. TaskifAI unifies sales data from all your wholesale partners into one strategic dashboard.">
+    <meta property="og:image" content="https://www.taskifai.com/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.taskifai.com/">
+    <meta property="twitter:title" content="TaskifAI | Collaborative Brand Intelligence">
+    <meta property="twitter:description" content="Stop drowning in reseller spreadsheets. TaskifAI unifies sales data from all your wholesale partners into one strategic dashboard.">
+    <meta property="twitter:image" content="https://www.taskifai.com/og-image.jpg">
+
+    <!-- JSON-LD Structured Data for AEO (Organization & Software) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.taskifai.com/#organization",
+          "name": "TaskifAI AB",
+          "url": "https://www.taskifai.com",
+          "logo": "https://www.taskifai.com/logo.png",
+          "sameAs": [
+            "https://www.linkedin.com/company/taskifai"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Malmö",
+            "addressCountry": "SE"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "TaskifAI",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Cloud",
+          "description": "TaskifAI is a platform that automatically cleans and unifies reports from resellers, providing strategic brand intelligence.",
+          "offers": {
+            "@type": "Offer",
+            "price": "899",
+            "priceCurrency": "EUR"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "24"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does TaskifAI handle different spreadsheet formats?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "TaskifAI uses a proprietary parsing engine to automatically detect patterns, standardize SKUs, and clean data from PDFs, CSVs, and Excel files, regardless of the reseller's format."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my sales data secure?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We use SOC 2 Type II compliant infrastructure, AES-256 encryption, and Row-Level Security. We also offer a 'No-Train Guarantee', ensuring your data is never used to train public AI models."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
@@ -31,9 +116,20 @@
                 900: '#18181B', // Almost Black
                 950: '#09090B', // Black
               },
-              // Keeping accents but desaturating or making them stark
+              brand: {
+                50: '#f0fdf4',
+                100: '#dcfce7',
+                200: '#bbf7d0',
+                300: '#86efac',
+                400: '#4ade80',
+                500: '#22c55e', // Vibrant Green
+                600: '#16a34a',
+                700: '#15803d',
+                800: '#166534',
+                900: '#14532d', // Deep Forest Green
+              },
               accent: {
-                500: '#18181B', // Black accent
+                500: '#18181B',
               },
               muted: {
                 DEFAULT: '#F4F4F5',
@@ -46,7 +142,7 @@
               '2xl': '1rem',
             },
             boxShadow: {
-              'glow': '0 0 20px -5px rgba(0, 0, 0, 0.1)',
+              'glow': '0 0 20px -5px rgba(34, 197, 94, 0.2)',
             }
           }
         }
@@ -59,7 +155,7 @@
       }
       html {
         scroll-behavior: smooth;
-        font-size: 12.5px; /* Further scaled down */
+        font-size: 14px; 
       }
       body {
         background-color: #FFFFFF;
@@ -105,10 +201,10 @@
         border: 2px solid #FAFAFA;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #71717A;
+        background: #09090B;
       }
       ::selection {
-        background: #18181B;
+        background: #09090B;
         color: #FFFFFF;
       }
     </style>
