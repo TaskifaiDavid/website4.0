@@ -1,20 +1,19 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Brain, Terminal, Loader2, Sparkles, FileSpreadsheet, Database } from 'lucide-react';
 
 const DataTransformationVisual = () => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 flex items-center justify-center opacity-30 pointer-events-none">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 flex items-center justify-center opacity-20 pointer-events-none">
        {/* Central Unified Core */}
        <div className="relative">
           <motion.div 
              animate={{ scale: [1, 1.05, 1] }}
              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-             className="w-64 h-64 rounded-full bg-primary-200/50 blur-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+             className="w-64 h-64 rounded-full bg-primary-100/50 blur-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           />
           <div className="relative z-10 w-32 h-32 bg-white rounded-2xl border border-primary-200 shadow-xl flex flex-col items-center justify-center">
-             <Database size={40} className="text-primary-800 mb-2" />
+             <Database size={40} className="text-primary-900 mb-2" />
              <div className="text-[10px] font-bold text-primary-900 uppercase tracking-widest">Unified</div>
           </div>
 
@@ -43,7 +42,7 @@ const DataTransformationVisual = () => {
                   }}
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-14 bg-white border border-primary-200 rounded shadow-sm flex items-center justify-center"
                >
-                  <FileSpreadsheet size={20} className="text-primary-400" />
+                  <FileSpreadsheet size={20} className="text-primary-300" />
                </motion.div>
              )
           })}
@@ -105,7 +104,7 @@ const ChatBubble: React.FC<{ message: Message }> = ({ message }) => {
       <div className={`max-w-[92%] px-4 py-3 rounded-2xl text-xs font-mono leading-relaxed relative ${bubbleStyle}`}>
         {/* Header Label for System Messages */}
         {!isUser && (
-          <div className={`flex items-center gap-1.5 mb-1.5 text-[9px] font-bold uppercase tracking-wider ${isOrchestrator ? 'text-primary-800' : 'text-primary-500'}`}>
+          <div className={`flex items-center gap-1.5 mb-1.5 text-[9px] font-bold uppercase tracking-wider text-primary-500`}>
             {isOrchestrator ? <Brain size={10} /> : <Terminal size={10} />}
             {isOrchestrator ? 'Strategist' : 'Analyst'}
           </div>
@@ -206,9 +205,9 @@ const ChatAnimation = () => {
         <div className="flex items-center gap-2">
           <div className="relative flex h-2.5 w-2.5">
              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-800"></span>
+             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary-600"></span>
           </div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary-800/60 font-mono">TaskifAI Core</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-primary-900/60 font-mono">TaskifAI Core</span>
         </div>
         <div className="text-[10px] font-mono text-primary-400">Live Demo</div>
       </div>
@@ -224,7 +223,7 @@ const ChatAnimation = () => {
                initial={{ opacity: 0, scale: 0.9 }}
                animate={{ opacity: 1, scale: 1 }}
                exit={{ opacity: 0, scale: 0.9 }}
-               className="flex items-center gap-2 text-primary-500 text-xs font-mono ml-1 mb-2"
+               className="flex items-center gap-2 text-primary-600 text-xs font-mono ml-1 mb-2"
              >
                <Loader2 size={12} className="animate-spin" />
                <span>Processing wholesale data...</span>
@@ -248,14 +247,14 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-primary-200 text-primary-800 text-[10px] font-bold uppercase tracking-[0.15em] mb-8 shadow-sm">
-            <Sparkles size={12} className="text-primary-800" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-primary-200 text-primary-700 text-[10px] font-bold uppercase tracking-[0.15em] mb-8 shadow-sm">
+            <Sparkles size={12} className="text-primary-600" />
             The Future of Operations
           </div>
           
-          <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-normal text-primary-900 leading-[1.1] tracking-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-7xl font-extrabold text-primary-900 leading-[1.05] tracking-tight mb-6">
             Stop Drowning in <br />
-            <span className="whitespace-nowrap">Reseller Spreadsheets.</span>
+            <span className="text-primary-700">Reseller Spreadsheets.</span>
           </h1>
 
           <p className="text-xl sm:text-2xl font-medium text-primary-900 mb-6 tracking-tight">
@@ -272,15 +271,12 @@ const Hero: React.FC = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 href="#contact"
-                className="px-8 py-4 bg-primary-900 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary-900/20 hover:bg-black transition-colors"
+                className="px-8 py-4 bg-primary-900 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-primary-900/10 hover:bg-black transition-colors"
               >
                 Book a Demo
                 <ArrowRight size={16} />
               </motion.a>
             </div>
-            <p className="text-xs text-primary-400 font-medium">
-              Schedule a personalized walkthrough.
-            </p>
           </div>
         </motion.div>
 

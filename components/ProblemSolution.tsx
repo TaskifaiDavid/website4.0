@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, AlertCircle, Brain, Database, Layers, Shield, Globe, Lock, FileText, CheckCircle } from 'lucide-react';
@@ -169,9 +168,9 @@ const ProblemSolution: React.FC = () => {
                  <p className="text-primary-600 mb-4 leading-relaxed max-w-3xl">
                    Upload any reseller report - PDF, CSV, XLS, whatever format they send. Our proprietary parsing engine detects patterns, standardizes SKUs, cleans anomalies, and merges everything into a single source of truth. This is the 'unglamorous' infrastructure layer that makes everything else possible.
                  </p>
-                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 text-primary-800 rounded text-xs font-bold">
+                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 text-primary-700 rounded text-xs font-bold">
                    <CheckCircle size={12} />
-                   Bibbi Parfum: 40 hours → 2 hours monthly (75% reduction)
+                   Average Impact: 40 hours → 2 hours monthly (95% reduction)
                  </div>
                </div>
             </motion.div>
