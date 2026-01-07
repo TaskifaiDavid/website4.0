@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
@@ -14,7 +13,7 @@ const PricingCard: React.FC<{
   buttonText: string;
   bestFor: string;
 }> = ({ title, price, period, setupFee, description, features, isPopular, buttonText, bestFor }) => (
-  <div className={`relative p-8 rounded-2xl border ${isPopular ? 'border-primary-900 bg-primary-50' : 'border-primary-200 bg-white'} flex flex-col h-full hover:shadow-xl transition-shadow duration-300`}>
+  <div className={`relative p-8 rounded-2xl border ${isPopular ? 'border-primary-900 bg-primary-50/50' : 'border-primary-200 bg-white'} flex flex-col h-full hover:shadow-xl transition-shadow duration-300`}>
     {isPopular && (
       <div className="absolute top-0 right-0 bg-primary-900 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-bl-xl rounded-tr-xl">
         Most Popular
@@ -53,7 +52,7 @@ const PricingCard: React.FC<{
     <button className={`w-full py-3 rounded-lg text-sm font-bold transition-all ${
       isPopular 
         ? 'bg-primary-900 text-white hover:bg-black shadow-lg shadow-primary-900/10' 
-        : 'bg-white border border-primary-200 text-primary-900 hover:border-primary-900 hover:bg-primary-50'
+        : 'bg-white border border-primary-200 text-primary-900 hover:border-primary-900 hover:text-primary-900 hover:bg-primary-50'
     }`}>
       {buttonText}
     </button>
@@ -66,7 +65,7 @@ const Pricing: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-primary-500 font-bold uppercase tracking-[0.2em] text-[10px] mb-4 block">Pricing</span>
+          <span className="text-primary-900 font-bold uppercase tracking-[0.2em] text-[10px] mb-4 block">Pricing</span>
           <h2 className="text-3xl md:text-5xl font-bold text-primary-900 mb-6 tracking-tight">Transparent Pricing. Real ROI.</h2>
           <p className="text-lg text-primary-500">
             Setup fees are waived on annual contracts.
